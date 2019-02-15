@@ -1,0 +1,85 @@
+<div class="panel-body">
+    <!--
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+    and open the template in the editor.
+    -->
+    <h4>Tabla de Productos</h4>
+    <table class="resultados table table-striped">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Agregar
+            </th>
+
+            <th>
+            </th>
+        </tr>
+        <tr ng-repeat="row in listaProductos">
+            <td>{{row.nombre}}</td>
+            <td class="row">{{row.valor}}</td>
+            <td class="row">
+                <input type="number" 
+                       name="cantidad"
+                       ng-model="datosDetalleFactura.cantidad"/>
+            </td>
+            <td class="row">
+                <button type="button" class="btn btn-default" ng-click="agregar(row)">
+                    agregar
+                </button>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <div>
+        <hr style="color: #0056b2;" />
+        <h4>Factura</h4>
+        <div class="form-group col-md-6" ng-class="errores.Factura ? 'error' : ''">
+            <table class="resultados table table-striped" id="table-carrito">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>squ
+                        Precio
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Agregar
+                    </th>
+
+                    <th>
+                    </th>
+                </tr>
+                <tr ng-repeat="row in listaDetalles">
+                    <td>{{row.producto.nombre}}</td>
+                    <td class="row">{{row.totalProducto}}</td>
+                    <td class="row">{{row.cantidad}}</td>
+                    <td class="row">
+                        <button type="button" class="btn btn-default" >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="form-group col-md-6" ng-class="errores.nombre ? 'error' : ''">
+             <h4>Total Factura:  </h4>
+             <h4 ng-model="datosDetalleFactura.totalProducto"> </h4>
+            <button type="button" class="btn btn-primary" ng-click="comprar()">Realizar Pago con tarjeta</button>
+        </div>
+    </div>
+</div>
