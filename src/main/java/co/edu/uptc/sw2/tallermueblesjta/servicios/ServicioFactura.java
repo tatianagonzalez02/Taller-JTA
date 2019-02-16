@@ -6,6 +6,7 @@
 package co.edu.uptc.sw2.tallermueblesjta.servicios;
 
 import co.edu.uptc.sw2.tallermueblesjta.entities.Factura;
+import co.edu.uptc.sw2.tallermueblesjta.logica.DetalleFacturaLogica;
 import co.edu.uptc.sw2.tallermueblesjta.logica.FacturaLogica;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,6 +24,7 @@ import javax.ws.rs.Path;
 public class ServicioFactura {
     @EJB
     private FacturaLogica facturaLogica;
+    private ServicioDetalleFactura detalleFactura;
     
     @GET
     public List<Factura> consultarFactura(){
@@ -30,6 +32,8 @@ public class ServicioFactura {
     }
     @POST
     public Factura guardarFactura(Factura factura){
+      
+    // aqui se l¿guaarda detalle ~~~~~~~~
         System.out.println("entre al ser+++++++++++++++++++++++++++++" + factura.getListaDetalleF().size());
     return facturaLogica.nuevaFactura(factura);
     }   

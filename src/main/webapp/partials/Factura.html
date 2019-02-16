@@ -23,15 +23,15 @@
             <th>
             </th>
         </tr>
-        <tr ng-repeat="row in listaProductos">
-            <td>{{row.nombre}}</td>
-            <td class="row">{{row.valor}}</td>
-            <td class="row">
+        <tr ng-repeat="rowP in listaProductos">
+            <td>{{rowP.nombre}}</td>
+            <td class="rowP">{{rowP.valor}}</td>
+            <td class="rowP">
                 <input type="number" 
                        name="cantidad"
                        ng-model="datosDetalleFactura.cantidad"/>
             </td>
-            <td class="row">
+            <td class="rowP">
                 <button type="button" class="btn btn-default" ng-click="agregar(row)">
                     agregar
                 </button>
@@ -78,7 +78,7 @@
 
         <div class="form-group col-md-6" ng-class="errores.nombre ? 'error' : ''">
              <h4>Total Factura:  </h4>
-             <h4 ng-model="datosDetalleFactura.totalProducto"> </h4>
+             <!--<h4 ng-model="datosDetalleFactura.totalProducto"> </h4>-->
             <button type="button" class="btn btn-primary" ng-click="comprar()">Realizar Pago con tarjeta</button>
         </div>
     </div>
