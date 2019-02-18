@@ -5,6 +5,7 @@
     and open the template in the editor.
     -->
     <h4>Tabla de Productos</h4>
+    
     <table class="resultados table table-striped">
         <tr>
             <th>
@@ -23,15 +24,17 @@
             <th>
             </th>
         </tr>
-        <tr ng-repeat="rowP in listaProductos">
-            <td>{{rowP.nombre}}</td>
-            <td class="rowP">{{rowP.valor}}</td>
-            <td class="rowP">
+        <tr ng-repeat="row in listaProductos">
+            <td>{{row.nombre}}</td>
+            <td class="row">{{row.valor}}</td>
+            <td class="row">
                 <input type="number" 
                        name="cantidad"
-                       ng-model="datosDetalleFactura.cantidad"/>
+                       ng-model="datosDetalleFactura.cantidad[$index]"/>
+                       <!--ng-model="datosDetalleFactura.cantidad[$index]"/>-->
+                
             </td>
-            <td class="rowP">
+            <td class="row">
                 <button type="button" class="btn btn-default" ng-click="agregar(row)">
                     agregar
                 </button>
@@ -49,11 +52,11 @@
                     <th>
                         Nombre
                     </th>
-                    <th>squ
-                        Precio
-                    </th>
                     <th>
                         Cantidad
+                    </th>
+                    <th>
+                        Total
                     </th>
                     <th>
                         Agregar
@@ -62,10 +65,11 @@
                     <th>
                     </th>
                 </tr>
-                <tr ng-repeat="row in listaDetalles">
+                <tr ng-repeat="row in datosFactura.listaDetalleF track by $index">
                     <td>{{row.producto.nombre}}</td>
+                    <td class="row">{{row.cantidad[0]}}</td>
                     <td class="row">{{row.totalProducto}}</td>
-                    <td class="row">{{row.cantidad}}</td>
+                    
                     <td class="row">
                         <button type="button" class="btn btn-default" >
                             Eliminar
@@ -77,7 +81,14 @@
         </div>
 
         <div class="form-group col-md-6" ng-class="errores.nombre ? 'error' : ''">
-             <h4>Total Factura:  </h4>
+             
+            <h4>Total Factura:  </h4>
+            <input ng-model="datosFactura.valorFactura"
+                   ng-disabled="true"/>
+            <h4>Nombre:  </h4>
+            <input type="text" 
+                       name="cliente"
+                       ng-model="datosFactura.cliente"/>
              <!--<h4 ng-model="datosDetalleFactura.totalProducto"> </h4>-->
             <button type="button" class="btn btn-primary" ng-click="comprar()">Realizar Pago con tarjeta</button>
         </div>
