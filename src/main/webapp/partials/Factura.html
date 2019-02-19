@@ -30,6 +30,7 @@
             <td class="row">
                 <input type="number" 
                        name="cantidad"
+                       min="1"
                        ng-model="datosDetalleFactura.cantidad[$index]"/>
                        <!--ng-model="datosDetalleFactura.cantidad[$index]"/>-->
                 
@@ -67,7 +68,7 @@
                 </tr>
                 <tr ng-repeat="row in datosFactura.listaDetalleF track by $index">
                     <td>{{row.producto.nombre}}</td>
-                    <td class="row">{{row.cantidad[0]}}</td>
+                    <td class="row">{{row.cantidad[row.producto.idProducto-1]}}</td>
                     <td class="row">{{row.totalProducto}}</td>
                     
                     <td class="row">
@@ -88,7 +89,7 @@
             <h4>Nombre:  </h4>
             <input type="text" 
                        name="cliente"
-                       ng-model="datosFactura.cliente"/>
+                       ng-model="datosFactura.clienteTienda"/>
              <!--<h4 ng-model="datosDetalleFactura.totalProducto"> </h4>-->
             <button type="button" class="btn btn-primary" ng-click="comprar()">Realizar Pago con tarjeta</button>
         </div>

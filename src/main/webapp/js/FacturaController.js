@@ -29,15 +29,16 @@ module.controller('FacturaController', ['$scope', '$filter', '$http', function (
                     });
         }
         //agregat detalle 
-        $scope.guardarDetalleFactura = function () {
-            $http.post("./webresources/ServicioDetalleFactura", $scope.datosDetalleFactura)
-                    .then(function (response) {
-                        console.log(response.data);
-                        $scope.getDetalleFactura();
-                    }, function () {
-                        alert("error");
-                    });
-        }
+//        $scope.guardarDetalleFactura = function () {
+//            $http.post("./webresources/ServicioDetalleFactura", 
+//            $scope.datosFactura.listaDetalleF)
+//                    .then(function (response) {
+//                        console.log(response.data);
+//                        $scope.getDetalleFactura();
+//                    }, function () {
+//                        alert("error");
+//                    });
+//        }
         //guardar factura
         $scope.guardarFactura = function () {
             console.log("yo no guaardo");
@@ -46,7 +47,7 @@ module.controller('FacturaController', ['$scope', '$filter', '$http', function (
                         console.log(response.data);
                         $scope.getFactura();
                     }, function () {
-                        alert("error");
+                        alert(" error en guardarFactura");
                     });
         }
         $scope.agregar = function (data) {
@@ -54,39 +55,39 @@ module.controller('FacturaController', ['$scope', '$filter', '$http', function (
             //$scope.listaDetalles.factura.id = 
             console.log('agregado a carrito');
             console.log($scope.listaProductos.length);
-          
+
             for (var i = 0; i < $scope.listaProductos.length; i++) {
                 if ($scope.listaProductos[i] == data) {
-                       
+
                     $scope.datosDF.idDetalle = $scope.id++;
                     $scope.datosDF.producto = $scope.listaProductos[i];
                     $scope.datosDF.totalProducto = data.valor * $scope.datosDetalleFactura.cantidad[i];
                     $scope.datosDF.cantidad = $scope.datosDetalleFactura.cantidad;
+                    console.log("este es la cantidad"+$scope.datosDF.cantidad);
 //                    console.log('aqui voy' +  $scope.datosDetalleFactura.idDetalle + "p" + $scope.datosDetalleFactura.producto.nombre);
 //                    $scope.listaDetalles.push($scope.datosDetalleFactura);
-                    
-                    $scope.datosFactura.listaDetalleF.push($scope.datosDF.valueOf());
-                        console.log($scope.datosFactura);
-                    
 
-                   
+                    $scope.datosFactura.listaDetalleF.push($scope.datosDF.valueOf());
+                    console.log($scope.datosFactura);
+
+
+
                 }
             }
             var suma = 0;
-            for (var i = 0; i <  $scope.datosFactura.listaDetalleF.length; i++) {
-                
+            for (var i = 0; i < $scope.datosFactura.listaDetalleF.length; i++) {
+
                 suma += $scope.datosFactura.listaDetalleF[i].totalProducto;
                 console.log(suma + "= suma")
-                  $scope.datosFactura.valorFactura = suma;
+                $scope.datosFactura.valorFactura = suma;
             }
-               
-              
+
+
 //        $scope.listaProductos={};
         }
         $scope.comprar = function () {
-
-            $scope.datosFactura.valorFactura = 60000;
             console.log("holi" + $scope.datosFactura.valorFactura);
+//            $scope.guardarDetalleFactura();
             $scope.guardarFactura();
         }
 

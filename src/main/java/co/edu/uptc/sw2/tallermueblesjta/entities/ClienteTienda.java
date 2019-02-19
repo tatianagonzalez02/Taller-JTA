@@ -3,6 +3,8 @@ package co.edu.uptc.sw2.tallermueblesjta.entities;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -13,6 +15,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class ClienteTienda {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private float cedula;
     private String nombre;
     @OneToMany (cascade = {}, fetch = FetchType.LAZY, mappedBy = "clienteTienda")

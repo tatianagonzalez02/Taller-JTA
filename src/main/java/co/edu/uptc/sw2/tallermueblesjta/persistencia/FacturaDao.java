@@ -5,6 +5,7 @@
  */
 package co.edu.uptc.sw2.tallermueblesjta.persistencia;
 
+import co.edu.uptc.sw2.tallermueblesjta.entities.DetalleFactura;
 import co.edu.uptc.sw2.tallermueblesjta.entities.Factura;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,6 +27,10 @@ public class FacturaDao {
     }
     
     public Factura guardarFactura(Factura factura){
+        for (DetalleFactura df : factura.getListaDetalleF()) {
+            df.setFactura(factura);
+            em.persist(df);
+        }
       //  detalleFacturaDao.guardarDetalleFactura(factura.)
      em.persist(factura);
     return factura;

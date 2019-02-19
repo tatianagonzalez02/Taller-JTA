@@ -5,9 +5,13 @@
  */
 package co.edu.uptc.sw2.tallermueblesjta.servicios;
 
+import co.edu.uptc.sw2.tallermueblesjta.entities.ClienteTienda;
+import co.edu.uptc.sw2.tallermueblesjta.entities.DetalleFactura;
 import co.edu.uptc.sw2.tallermueblesjta.entities.Factura;
-import co.edu.uptc.sw2.tallermueblesjta.logica.DetalleFacturaLogica;
+import static co.edu.uptc.sw2.tallermueblesjta.entities.Factura_.listaDetalleF;
+import co.edu.uptc.sw2.tallermueblesjta.entities.Producto;
 import co.edu.uptc.sw2.tallermueblesjta.logica.FacturaLogica;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,9 +36,31 @@ public class ServicioFactura {
     }
     @POST
     public Factura guardarFactura(Factura factura){
+      ClienteTienda cliente=new ClienteTienda();
+      cliente.setCedula(1045938933);
+      cliente.setNombre( "Roberto patiño");
+      Producto p=new Producto();
+      p.setIdProducto(6);
+      p.setNombre("Librero");
+      p.setValor(150000);
+        DetalleFactura detalleFactura= new DetalleFactura();
+        detalleFactura.setIdDetalle(1);
+        detalleFactura.setProducto(p);
+        detalleFactura.setCantidad(2);
+        detalleFactura.setTotalProducto(p.getValor()*detalleFactura.getCantidad());
+              
+      Factura factura1= new Factura();
+      factura1.setIdFactura(1);
+      factura1.setClienteTienda(cliente);
+      factura1.setValorFactura(780000);
+      factura1.setFecha(new Date());
+      List<DetalleFactura> list=null;
+      list.add(detalleFactura);
+      factura1.setListaDetalleF(list);
+     System.out.println("entre al ser+++++++++++++++++++++++++++++" + factura1.getListaDetalleF().size());
+      facturaLogica.nuevaFactura(factura1);
       
-    // aqui se l¿guaarda detalle ~~~~~~~~
-        System.out.println("entre al ser+++++++++++++++++++++++++++++" + factura.getListaDetalleF().size());
-    return facturaLogica.nuevaFactura(factura);
+//    return facturaLogica.nuevaFactura(factura);
+return facturaLogica.nuevaFactura(factura1);
     }   
 }
